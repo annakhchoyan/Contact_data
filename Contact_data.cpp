@@ -34,7 +34,8 @@ void Person::add_new_Contact()
 	std::cin >> m_email;
 
 	std::ofstream cont("Contact_data.txt", std::ios::app);
-	if(cont.is_open())
+	
+	if (cont.is_open())
 	{
 		cont << m_email << " ";
 		cont << m_name << " ";
@@ -58,14 +59,16 @@ void Person::list_all_Contact()
 {
 	std::string line;
 	std::ifstream cont("Contact_data.txt");
-	if(cont.is_open())
+	
+	if (cont.is_open())
 	{
-		while(getline(cont, line))
+		while (getline(cont, line))
 		{	
 			std::cout << std::endl;
 			std::cout << "`````````````````````````````````````````````````" << std::endl;
 			std::cout << " -->  " << line << std::endl;
 		}
+		
 		cont.close();
 	}
 	else
@@ -83,28 +86,33 @@ void Person::search_for_Contact()
 	std::cin >> m_email;
 	std::string line;
 	std::ifstream cont("Contact_data.txt");
-	if(cont.is_open())
+	
+	if (cont.is_open())
 	{
-		while(getline(cont, line))
+		while (getline(cont, line))
 		{
 			int i = 0;
 			email_fail = "";
-			while(line[i] != ' ')
+			
+			while (line[i] != ' ')
 			{
 				email_fail += line[i];
 				++i;
 			}
-			if(m_email == email_fail)
+			if (m_email == email_fail)
 			{
 				//std::cout << line << std::endl;
 				std::cout << m_email;
-				for(int j = i; j < line.length(); ++j)
+				
+				for (int j = i; j < line.length(); ++j)
 				{
 					std::cout << line[j];
 				}
+				
 				std::cout << std::endl;
 			}
 		}
+		
 		cont.close();
 	}
 	else
@@ -125,30 +133,36 @@ void Person::delete_a_Contact()
 	std::ifstream cont("Contact_data.txt");
 	std::ofstream tmp;
 	tmp.open("tmp.txt");
-	if(cont.is_open())
+	
+	if (cont.is_open())
 	{
-		while(getline(cont, line))
+		while (getline(cont, line))
 		{
 			int i = 0;
 			email_fail = "";
-			while(line[i] != ' ')
+			
+			while (line[i] != ' ')
 			{
 				email_fail += line[i];
 				++i;
 			}
-			if(m_email != email_fail)
+			if (m_email != email_fail)
 			{	
 				//tmp << line << std::endl;
 				std::cout << std::endl;
 				tmp << email_fail;
-				for(int j = i; j < line.length(); ++j)
+				
+				for (int j = i; j < line.length(); ++j)
 				{
 					tmp << line[j];			
 				}
+				
 				std::cout << std::endl;
 			}
+			
 			std::cout << std::endl;
 		}
+		
 		tmp.close();
 		cont.close();
 		remove("Contact_data.txt");
@@ -166,6 +180,7 @@ void Person::edit_a_Contact()
 {
 	std::cout << "Enter email: ";
 	std::cin >> m_email;
+	
 	std::ifstream cont("Contact_data.txt");
 	std::ofstream tmp;
 	tmp.open("tmp.txt");
@@ -182,44 +197,54 @@ void Person::edit_a_Contact()
 	std::cout << "Enter the data, you want to change: ";
 	std::cin >> change;
 	int i = 0;
-	if(cont.is_open())
+	
+	if (cont.is_open())
 	{
-		while(getline(cont, line))
+		while (getline(cont, line))
 		{
 			//email_fail = "";
-			while(line[i] != ' ')
+			while (line[i] != ' ')
 			{
 				email_fail += line[i];
 				++i;
 			}
-			if(m_email == email_fail)
+			if (m_email == email_fail)
 			{
 				++i;
-				while(line[i] != ' ')
+				
+				while (line[i] != ' ')
 				{
 					name += line[i];
 					++i;
 				}
+				
 				++i;
-				while(line[i] != ' ')
+				
+				while (line[i] != ' ')
 				{
 					surname += line[i];
 					++i;
 				}
+				
 				++i;
-				while(line[i] != ' ')
+				
+				while (line[i] != ' ')
 				{
 					data += line[i];
 					++i;
 				}
+				
 				++i;
-				while(line[i] != ' ')
+				
+				while (line[i] != ' ')
 				{
 					id += line[i];
 					++i;
 				}
+				
 				++i;
-				while(line[i] != ' ' || line[i] != (line.size() - 1))
+				
+				while (line[i] != ' ' || line[i] != (line.size() - 1))
 				{
 					number += line[i];
 				}
@@ -227,32 +252,34 @@ void Person::edit_a_Contact()
 				std::string data_change;
 				std::cout << "Enter the new data: ";
 				std::cin >> data_change;
-				if(change == email_fail)
+				
+				if (change == email_fail)
 				{
 					m_email = data_change;
 				}
-				if(change == name)
+				if (change == name)
 				{
 					m_name = data_change;
 				}
-				if(change == surname)
+				if (change == surname)
 				{
 					m_surname = data_change;
 				}
-				if(change == data)
+				if (change == data)
 				{
 					m_data = data_change;
 				}
-				if(change == id)
+				if (change == id)
 				{
 					m_id = data_change;
 				}
-				if(change == number)
+				if (change == number)
 				{
 					m_number = data_change;
 				}
 			}
 		}
+		
 		cont.close();
 	}
 }
@@ -261,8 +288,10 @@ int main()
 {
 	Person per1;
 	int num;
+	
 	do
-	{	std::cout << "``````````````````````````" << std::endl;
+	{	
+		std::cout << "``````````````````````````" << std::endl;
 		std::cout << "1. Add a new Contact" << std::endl;
 		std::cout << "2. List all Contacts" << std::endl;
 		std::cout << "3. Search for Contact" << std::endl;
@@ -272,6 +301,7 @@ int main()
 		
 		std::cout << "Enter a number(1-6): ";
 		std::cin >> num;
+		
 		switch(num)
 		{
 			case 1:
@@ -293,54 +323,7 @@ int main()
 				return 0;
 				break;
 		}
-	}while(num != 6);
+	} while (num != 6);
 
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
